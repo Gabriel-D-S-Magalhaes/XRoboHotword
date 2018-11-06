@@ -1,22 +1,15 @@
 package br.com.xrobo.xrobo_hotword;
 
-import android.app.VoiceInteractor;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.service.voice.AlwaysOnHotwordDetector;
-import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionSession;
-import android.service.voice.VoiceInteractionSessionService;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
-
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,30 +18,33 @@ public class MainActivity extends AppCompatActivity {
     private boolean bindService = false;
 
     private MyVoiceInteractionService voiceInteractionService;
-    private AlwaysOnHotwordDetector hotwordDetector;
+
+    private Intent service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        service = new Intent(MainActivity.this, MyVoiceInteractionService.class);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        // Geralmente, alterna-se entre a vinculação e a desvinculação durante os momentos
+        // crescentes e decrescentes do ciclo de vida do cliente. Por exemplo:
+        // Se precisar interagir com o serviço enquanto a atividade estiver visível, será necessário
+        // vincular durante onStart() e desvincular durante onStop().
+
         // Bind to MyVoiceInteractionService
-        //final Intent service = new Intent(MainActivity.this, VoiceInteractionService.class);
-        //bindService(service, conn, Context.BIND_AUTO_CREATE);
+        bindService(service, conn, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
-        if (hotwordDetector != null) {
-            hotwordDetector.stopRecognition();
-        }
 
         // Unbind from the service
         if (bindService) {
@@ -72,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
          * this callback. Your app won't receive a callback if there's an issue with
          * the service, such as the service crashing while being created.
          *
+         * O sistema chama isso para entregar o IBinder retornado pelo método onBind() do serviço.
+         *
          * @param name    The concrete component name of the service that has
          *                been connected.
          * @param service The IBinder of the Service's communication channel,
@@ -85,15 +83,6 @@ public class MainActivity extends AppCompatActivity {
             voiceInteractionService = binder.getService();
 
             bindService = true;
-
-//            hotwordDetector = voiceInteractionService.createAlwaysOnHotwordDetector(
-//                    "Hello Android", Locale.US, new MyHotwordDetector());
-
-//            hotwordDetector = voiceInteractionService.createAlwaysOnHotwordDetector(
-//                    "Olá Rebeca",
-//                    new Locale("pt", "BR"),
-//                    new MyHotwordDetector());
-//            hotwordDetector.startRecognition(AlwaysOnHotwordDetector.RECOGNITION_FLAG_CAPTURE_TRIGGER_AUDIO);
         }
 
         /**
@@ -102,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
          * This does <em>not</em> remove the ServiceConnection itself -- this
          * binding to the service will remain active, and you will receive a call
          * to {@link #onServiceConnected} when the Service is next running.
+         *
+         * O sistema Android chama isso quando a conexão ao serviço é perdida inesperadamente, como
+         * quando o serviço apresenta problemas ou é fechado de forma repentina. Isso não é chamado
+         * quando o cliente desfaz o vínculo.
          *
          * @param name The concrete component name of the service whose
          *             connection has been lost.

@@ -25,6 +25,14 @@
                 android:name="android.voice_interaction"
                 android:value="@xml/my_voice_interaction_service" />
         </service>
+
+        <service
+            android:name=".MyVoiceInteractionSessionService"
+            android:exported="false" />
+
+        <service
+            android:name=".MyRecognitionService"
+            android:exported="false" />
     </application>
 
 </manifest>
