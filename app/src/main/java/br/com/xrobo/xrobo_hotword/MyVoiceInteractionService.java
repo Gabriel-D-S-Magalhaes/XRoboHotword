@@ -59,10 +59,6 @@ public class MyVoiceInteractionService extends VoiceInteractionService {
 
         this.alwaysOnHotwordDetector = createAlwaysOnHotwordDetector("Hello Android",
                 Locale.US, mHotwordCallback);
-
-        Bundle args = new Bundle();
-        args.putParcelable("intent", new Intent(this, TestInteractionActivity.class));
-        showSession(args, VoiceInteractionSession.SHOW_WITH_SCREENSHOT);
     }
 
     @Override

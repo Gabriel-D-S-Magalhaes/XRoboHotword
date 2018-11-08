@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "onServiceConnected.");
 
             // We've bound to MyVoiceInteractionService, cast the IBinder and get LocalService instance
-            MyVoiceInteractionService.LocalBinder binder = (MyVoiceInteractionService.LocalBinder) service;
-            voiceInteractionService = binder.getService();
+            //MyVoiceInteractionService.LocalBinder binder = (MyVoiceInteractionService.LocalBinder) service;
+            //voiceInteractionService = binder.getService();
 
             bindService = true;
         }
