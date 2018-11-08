@@ -9,22 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
-            <intent-filter>
+            <!--intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
-        <service
-            android:name=".MyVoiceInteractionSessionService"
-            android:exported="false" />
+            </intent-filter-->
+        </activity>
 
         <activity
             android:name=".VoiceInteractionMain"
-            android:label="Voice Interaction"
-            android:theme="@android:style/Theme.Material">
+            android:label="Voice Interaction">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SettingsActivity"
             android:excludeFromRecents="true"
@@ -58,10 +57,12 @@
                 <action android:name="android.service.voice.VoiceInteractionService" />
             </intent-filter>
         </service>
+
         <service
-            android:name=".MainInteractionSessionService"
+            android:name=".MyVoiceInteractionSessionService"
             android:permission="android.permission.BIND_VOICE_INTERACTION"
             android:process=":session" />
+
         <service
             android:name=".MyRecognitionService"
             android:exported="false"
@@ -74,7 +75,7 @@
 
             <meta-data
                 android:name="android.speech"
-                android:resource="@xml/recognition_service" />
+                android:resource="@xml/my_recognition_service" />
         </service>
 
         <activity
@@ -88,6 +89,7 @@
                 <category android:name="android.intent.category.VOICE" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

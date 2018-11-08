@@ -2,5 +2,6 @@
 <voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:recognitionService="br.com.xrobo.xrobo_hotword.MyRecognitionService"
     android:sessionService="br.com.xrobo.xrobo_hotword.MyVoiceInteractionSessionService"
+    android:settingsActivity="br.com.xrobo.xrobo_hotword.SettingsActivity"
     android:supportsAssist="false"
     android:supportsLaunchVoiceAssistFromKeyguard="false" />

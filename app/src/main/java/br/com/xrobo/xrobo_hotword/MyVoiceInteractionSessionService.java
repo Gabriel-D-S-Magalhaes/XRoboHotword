@@ -26,8 +26,7 @@ public class MyVoiceInteractionSessionService extends VoiceInteractionSessionSer
 
     @Override
     public VoiceInteractionSession onNewSession(Bundle args) {
-        Log.i(TAG, "onNewSession.");
-        return null;
+        return new MyVoiceInteractionSession(this);
     }
 
     public class LocalBinder extends Binder {

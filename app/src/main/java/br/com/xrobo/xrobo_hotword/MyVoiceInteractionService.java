@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.service.voice.AlwaysOnHotwordDetector;
 import android.service.voice.VoiceInteractionService;
-import android.support.annotation.NonNull;
+import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
 
 import java.util.Locale;
@@ -36,7 +36,9 @@ public class MyVoiceInteractionService extends VoiceInteractionService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle args = new Bundle();
-        args.putParcelable("intent", new Intent(this, ));
+        args.putParcelable("intent", new Intent(this, TestInteractionActivity.class));
+        showSession(args, VoiceInteractionSession.SHOW_WITH_ASSIST);// TODO: Verificar
+        stopSelf(startId);
         return super.onStartCommand(intent, flags, startId);
     }
 
