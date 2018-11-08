@@ -78,6 +78,7 @@ public class MyVoiceInteractionSession extends VoiceInteractionSession implement
         mCompleteButton.setEnabled(mState == STATE_COMPLETE_VOICE);
     }
 
+    @Override
     public void onClick(View v) {
         if (v == mStartButton) {
             mState = STATE_LAUNCHING;
