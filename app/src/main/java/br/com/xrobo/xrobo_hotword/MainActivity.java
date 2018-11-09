@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.service.voice.AlwaysOnHotwordDetector;
-import android.service.voice.VoiceInteractionSession;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.i(TAG, "onServiceConnected.");
+
 
             // We've bound to MyVoiceInteractionService, cast the IBinder and get LocalService instance
             //MyVoiceInteractionService.LocalBinder binder = (MyVoiceInteractionService.LocalBinder) service;

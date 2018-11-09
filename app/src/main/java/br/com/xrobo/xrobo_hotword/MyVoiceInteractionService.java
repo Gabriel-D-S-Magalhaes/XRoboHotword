@@ -53,23 +53,24 @@ public class MyVoiceInteractionService extends VoiceInteractionService {
 
     @Override
     public void onReady() {
-        super.onReady();
+        //super.onReady();
 
         Log.i(TAG, "Creating " + this);
 
-        this.alwaysOnHotwordDetector = createAlwaysOnHotwordDetector("Hello Android",
+        alwaysOnHotwordDetector = createAlwaysOnHotwordDetector("Hello Android",
                 Locale.US, mHotwordCallback);
     }
 
-    @Override
+    /*@Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand.");
         Bundle args = new Bundle();
         args.putParcelable("intent", new Intent(this, TestInteractionActivity.class));
         //showSession(args, VoiceInteractionSession.SHOW_WITH_SCREENSHOT);// TODO: Verificar
+
         stopSelf(startId);
         return START_NOT_STICKY;
-    }
+    }*/
 
     private void hotwordAvailabilityChangeHelper(int availability) {
         Log.i(TAG, "Hotword availability = " + availability);
